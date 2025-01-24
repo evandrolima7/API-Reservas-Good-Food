@@ -1,15 +1,15 @@
 import {Request, Response} from "express";
-import  clients  from "../model/Agenda";
 import dotenv from "dotenv";
 import  {generateToken}  from "../config/passport";
 import * as UserService from "../services/UserService";
+import * as ClientService from "../services/ClientService";
 
 dotenv.config();
 
 export const all = async (req: Request, res: Response) => {
 
   
-   let reservations = await clients.find({})
+   let reservations = await ClientService.all();
 
    res.json({ reservations })
 }
@@ -19,7 +19,7 @@ export const single = async (req: Request, res: Response) => {
   
   let {id} = req.params; 
   
-  let reservations = await clients.findById(id)
+  let reservations = await ClientService.findId(id);
  
  res.json({reservations})
 }
@@ -31,14 +31,7 @@ export const add = async (req: Request, res: Response) => {
 
     if (name && phone && dateReserve && timeReserve && quantity && observations) {
 
-      const newReserve = await clients.create({
-        name,
-        phone,
-        dateReserve,
-        timeReserve,
-        quantity,
-        observations,
-      });
+      const newReserve = await ClientService.addUser(name, phone, dateReserve, timeReserve, quantity, observations);
 
       res.status(201).json({ newReserve });
     } else {
@@ -49,7 +42,7 @@ export const add = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   
-  let client = await clients.findById(id);
+  let client = await ClientService.findId(id);
   if (!client) {
     res.status(404).json({ error: "Reserva não encontrada!" });
     return
@@ -76,7 +69,7 @@ export const destroy = async (req: Request, res: Response) => {
   
   let {id} = req.params;
   
-  let reserve = await clients.findById( id )
+  let reserve = await ClientService.findId(id);
   
   if(reserve){
   await reserve.deleteOne()
