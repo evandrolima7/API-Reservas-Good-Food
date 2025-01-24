@@ -18,11 +18,13 @@ Este projeto é uma API RESTful para gerenciamento de reservas de clientes. Dese
 ---
 
 ## *Funcionalidades*
+- Autenticação de Usuários: Registro e login de usuários com autenticação via JWT.
 - Adicionar novas reservas.
 - Listar todas as reservas.
 - Visualizar detalhes de uma reserva específica.
 - Atualizar informações de uma reserva.
 - Remover reservas existentes.
+- Lista de e-mails dos usuários.
 
 ---
 
@@ -33,6 +35,9 @@ Este projeto é uma API RESTful para gerenciamento de reservas de clientes. Dese
 - *TypeScript*
 - *dotenv*
 - *Cors*
+- Passport.js (para autenticação)
+- JWT (JSON Web Token)
+- Bcryptjs (para criptografia de senha)
 
 ---
 
@@ -68,6 +73,7 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
    env
    PORT=5000
    MONGO_URL=mongodb://localhost:27017/reserves
+   JWT_SECRET_KEY=sua-chave-secreta
    
 
 2. Inicie o servidor:
@@ -78,6 +84,35 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 ---
 
 ## *Endpoints*
+
+### *POST /register*
+Registra um novo usuário e gera um token JWT.
+
+#### Corpo da Requisição:
+{
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "password": "senha123"
+}
+#### Exemplo de Resposta:
+{
+  "id": "60d7b28f9b1e8d5b6e44c8b2",
+  "token": "seu-token-jwt-aqui"
+}
+
+### *POST /login*
+Faz login de um usuário e gera um token JWT.
+
+#### Corpo da Requisição:
+{
+  "email": "joao@email.com",
+  "password": "senha123"
+}
+#### Exemplo de Resposta:
+{
+  "status": true,
+  "token": "seu-token-jwt-aqui"
+}
 
 ### *GET /reserva*
 Lista todas as reservas.
@@ -173,6 +208,13 @@ Remove uma reserva pelo ID.
 json
 {}
 
+### *GET /list*
+Lista os e-mails dos usuários registrados (rota protegida por autenticação JWT).
+#### Exemplo de Resposta:
+{
+  "list": ["usuario1@email.com", "usuario2@email.com"]
+}
+
 
 ---
 
@@ -187,27 +229,6 @@ type userType = {
   quantity: number;
   observations?: string;
 };
-
-
----
-
-## *Estrutura do Projeto*
-
-|-- src
-|   |-- controllers
-|   |   |-- apiController.ts
-|   |-- database
-|   |   |-- mongo.ts
-|   |-- model
-|   |   |-- Agenda.ts
-|   |-- routes
-|   |   |-- api.ts
-|   |-- public
-|   |-- server.ts
-|-- .env
-|-- package.json
-|-- tsconfig.json
-
 
 ---
 
