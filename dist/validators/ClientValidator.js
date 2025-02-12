@@ -73,7 +73,6 @@ exports.default = {
             .isInt()
             .toInt()
             .withMessage('A quantidade deve ser um número inteiro')
-            .isPositive()
             .custom(value => value >= 1)
             .withMessage('A quantidade deve ser maior ou igual a 1'),
 
