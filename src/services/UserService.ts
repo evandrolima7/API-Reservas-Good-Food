@@ -27,5 +27,5 @@ export const matchPassword = async (passwordText: string, encrypted: string) => 
   };
 
 export const all = async () => {
-  return await User.find()
+  return User.find()
 };

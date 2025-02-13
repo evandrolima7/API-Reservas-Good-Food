@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addUser = exports.findId = exports.all = void 0;
 const Agenda_1 = __importDefault(require("../model/Agenda"));
 const all = async () => {
-    await Agenda_1.default.find();
-    return;
+    return Agenda_1.default.find();
 };
 exports.all = all;
 const findId = async (id) => {

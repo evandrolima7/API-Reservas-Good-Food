@@ -31,6 +31,6 @@ const matchPassword = async (passwordText, encrypted) => {
 };
 exports.matchPassword = matchPassword;
 const all = async () => {
-    return await User_1.default.find();
+    return User_1.default.find();
 };
 exports.all = all;

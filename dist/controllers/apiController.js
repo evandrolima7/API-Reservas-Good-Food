@@ -43,8 +43,9 @@ const UserService = __importStar(require("../services/UserService"));
 const ClientService = __importStar(require("../services/ClientService"));
 dotenv_1.default.config();
 const all = async (req, res) => {
-    let reservations = await ClientService.all();
-    res.json({ reservations });
+    const reservations = await ClientService.all();
+    const list = reservations.map(client => client);
+    res.json({ list });
 };
 exports.all = all;
 const single = async (req, res) => {

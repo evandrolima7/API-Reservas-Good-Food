@@ -7,12 +7,11 @@ import * as ClientService from "../services/ClientService";
 dotenv.config();
 
 export const all = async (req: Request, res: Response) => {
+    const reservations = await ClientService.all();
 
-  
-  let reservations = await ClientService.all();
-
-  res.json({ reservations })
-}
+    const list = reservations.map(client => client)
+    res.json({ list });
+};
 
 export const single = async (req: Request, res: Response) => {
 
