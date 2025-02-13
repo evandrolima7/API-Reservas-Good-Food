@@ -1,8 +1,7 @@
 import  clients  from "../model/Agenda";
 
 export const all = async () => {
-    await clients.find();
-    return;
+    return await clients.find();
   };
 
   export const findId = async (id: string) => {
@@ -20,3 +19,7 @@ export const all = async () => {
       observations,
     });
   };
+
+export function find() {
+  throw new Error("Function not implemented.");
+}

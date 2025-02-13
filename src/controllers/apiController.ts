@@ -9,9 +9,9 @@ dotenv.config();
 export const all = async (req: Request, res: Response) => {
 
   
-   let reservations = await ClientService.all();
+  let reservations = await ClientService.all();
 
-   res.json({ reservations })
+  res.json({ reservations })
 }
 
 export const single = async (req: Request, res: Response) => {
