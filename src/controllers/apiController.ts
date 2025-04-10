@@ -25,16 +25,21 @@ export const single = async (req: Request, res: Response) => {
 
 
 export const add = async (req: Request, res: Response) => {
-  
-    const { name, phone, dateReserve, timeReserve, quantity, observations } = req.body;
+  const { name, phone, dateReserve, timeReserve, quantity, observations } = req.body;
 
-    if (name && phone && dateReserve && timeReserve && quantity && observations) {
+  if (name && phone && dateReserve && timeReserve && quantity) {
+    const newReserve = await ClientService.addUser(
+      name,
+      phone,
+      dateReserve,
+      timeReserve,
+      quantity,
+      observations
+    );
 
-      const newReserve = await ClientService.addUser(name, phone, dateReserve, timeReserve, quantity, observations);
-
-      res.status(201).json({ newReserve });
-    } else {
-      res.status(400).json({ error: "Dados não enviados" })
+    res.status(201).json({ newReserve });
+  } else {
+    res.status(400).json({ error: "Dados obrigatórios não enviados" });
   }
 };
 

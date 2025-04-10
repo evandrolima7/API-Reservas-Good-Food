@@ -8,7 +8,7 @@ export const all = async () => {
     return await clients.findOne({_id: id});
   };
 
-  export const addUser = async ( name: string, phone: string, dateReserve: string, timeReserve: string, quantity: number, observations: string) => {
+  export const addUser = async ( name: string, phone: string, dateReserve: string, timeReserve: string, quantity: number, observations?: string) => {
     
     return await clients.create({
       name,
