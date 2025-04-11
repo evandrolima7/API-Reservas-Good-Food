@@ -8,14 +8,25 @@ export const all = async () => {
     return await clients.findOne({_id: id});
   };
 
-  export const addUser = async ( name: string, phone: string, dateReserve: string, timeReserve: string, quantity: number, observations?: string) => {
-    
-    return await clients.create({
-      name,
-      phone,
-      dateReserve,
-      timeReserve,
-      quantity,
-      observations,
-    });
+  export const addUser = async (
+    name: string, 
+    phone: string, 
+    dateReserve: string, 
+    timeReserve: string, 
+    quantity: number, 
+    observations?: string
+  ) => {
+    const data: any = { 
+      name, 
+      phone, 
+      dateReserve, 
+      timeReserve, 
+      quantity 
+    };
+  
+    if (observations && observations.trim() !== "") {
+      data.observations = observations;
+    }
+  
+    return await clients.create(data);
   };

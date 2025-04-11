@@ -15,7 +15,7 @@ const schema = new Schema < userType > ({
   dateReserve: { type: String, required: true },
   timeReserve: { type: String, required: true },
   quantity: { type: Number, required: true, min: 1 },
-  observations: { type: String, require:false, default: "" },
+  observations: { type: String, required:false},
 });
 
 const modelName = "clients";
