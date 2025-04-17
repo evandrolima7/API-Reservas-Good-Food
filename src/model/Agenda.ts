@@ -6,7 +6,7 @@ type userType = {
   dateReserve: string;
   timeReserve: string;
   quantity: number;
-  observations ? : string;
+  observations?: string;
 };
 
 const schema = new Schema < userType > ({
