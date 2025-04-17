@@ -16,17 +16,9 @@ export const all = async () => {
     quantity: number, 
     observations?: string
   ) => {
-    const data: any = { 
-      name, 
-      phone, 
-      dateReserve, 
-      timeReserve, 
-      quantity 
-    };
+    const data: any = { name, phone, dateReserve, timeReserve, quantity };
   
-    if (observations && observations.trim() !== "") {
-      data.observations = observations;
-    }
+    data.observations = observations?.trim() ?? "";
   
     return await clients.create(data);
   };
